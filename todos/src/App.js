@@ -9,15 +9,13 @@ class TodoItem extends Component {
   }
   render() {
     return (
-      
-      <li className={this.props.completed}>
+      <li className={this.props.completed ? ("completed") : ("")}>
         <div className="view">
-          <input className="toggle" type="checkbox"/>
+         {this.props.completed ? (<input className="toggle" type="checkbox" checked />) : (<input className="toggle" type="checkbox" />)}
           <label>{this.props.text}</label>
           <button className="destroy" />
         </div>
       </li>
-    
     );
   }
 }
@@ -32,8 +30,6 @@ class TodoList extends Component {
       <section className="main">
         <ul className="todo-list">
         {this.state.todos.map( todo => <TodoItem text={todo.title} completed={todo.completed} /> )}
-        <TodoItem text="Taste JavaScript" completed="completed"/>
-        <TodoItem text="Buy a unicorn" />
         </ul>
       </section>
     );
