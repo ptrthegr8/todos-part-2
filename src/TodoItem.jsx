@@ -2,24 +2,24 @@ import React from "react";
 
 function TodoItem(props) {
   return (
-    <li className={this.props.completed ? "completed" : ""}>
+    <li className={props.completed ? "completed" : ""}>
       <div className="view">
-        {this.props.completed ? (
+        {props.completed ? (
           <input
-            onChange={this.props.handleCheck}
+            onChange={props.handleCheck}
             className="toggle"
             type="checkbox"
             defaultChecked
           />
         ) : (
           <input
-            onChange={this.props.handleCheck}
+            onChange={props.handleCheck}
             className="toggle"
             type="checkbox"
           />
         )}
-        <label>{this.props.text}</label>
-        <button className="destroy" onClick={this.props.handleDelete} />
+        <label>{props.text}</label>
+        <button className="destroy" onClick={props.handleDelete} />
       </div>
     </li>
   );
