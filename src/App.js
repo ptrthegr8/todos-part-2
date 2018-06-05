@@ -1,66 +1,14 @@
 import React, { Component } from "react";
 import toDoList from "./todos.json";
 import "./index.css";
-
-class TodoItem extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <li className={this.props.completed ? "completed" : ""}>
-        <div className="view">
-          {this.props.completed ? (
-            <input
-              onChange={this.props.handleCheck}
-              className="toggle"
-              type="checkbox"
-              defaultChecked
-            />
-          ) : (
-            <input
-              onChange={this.props.handleCheck}
-              className="toggle"
-              type="checkbox"
-            />
-          )}
-          <label>{this.props.text}</label>
-          <button className="destroy" onClick={this.props.handleDelete} />
-        </div>
-      </li>
-    );
-  }
-}
-
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <section className="main">
-        <ul className="todo-list">
-          {this.props.todos.map(todo => (
-            <TodoItem
-              key={todo.id}
-              text={todo.title}
-              completed={todo.completed}
-              handleCheck={this.props.handleCheck(todo.id)}
-              handleDelete={this.props.handleDelete(todo.id)}
-            />
-          ))}
-        </ul>
-      </section>
-    );
-  }
-}
+import TodoList from "./TodoList.jsx";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { todos: toDoList };
+    this.state = {
+      todos: toDoList
+    };
   }
 
   handleCheck = id => e => {
@@ -80,12 +28,16 @@ class App extends Component {
 
   handleDelete = id => e => {
     const { todos } = this.state;
-    this.setState({ todos: todos.filter(todo => todo.id !== id) });
+    this.setState({
+      todos: todos.filter(todo => todo.id !== id)
+    });
   };
 
   handleDeleteCompleted = e => {
     const { todos } = this.state;
-    this.setState({ todos: todos.filter(todo => todo.completed === false) });
+    this.setState({
+      todos: todos.filter(todo => todo.completed === false)
+    });
   };
 
   handlePress = e => {
@@ -100,7 +52,9 @@ class App extends Component {
     };
     updatedTodoList.push(newTodo);
     if (e.key === "Enter" && e.target.value !== "") {
-      this.setState({ todos: updatedTodoList });
+      this.setState({
+        todos: updatedTodoList
+      });
       document.getElementById("text").value = "";
     }
   };
@@ -108,7 +62,7 @@ class App extends Component {
     return (
       <section className="todoapp">
         <header className="header">
-          <h1>todos</h1>
+          <h1> todos </h1>
           <input
             id="text"
             onKeyPress={this.handlePress}
@@ -117,26 +71,28 @@ class App extends Component {
             autoFocus
           />
         </header>
-
         <TodoList
           todos={this.state.todos}
           handleCheck={this.handleCheck}
           handleDelete={this.handleDelete}
-        />
+        />{" "}
         <footer className="footer">
           <span className="todo-count">
             <strong>
-              {this.state.todos.filter(todo => todo.completed === false).length}
+              {" "}
+              {
+                this.state.todos.filter(todo => todo.completed === false).length
+              }{" "}
             </strong>{" "}
-            item(s) left
-          </span>
+            item(s) left{" "}
+          </span>{" "}
           <button
             onClick={this.handleDeleteCompleted}
             className="clear-completed"
           >
-            Clear completed
-          </button>
-        </footer>
+            Clear completed{" "}
+          </button>{" "}
+        </footer>{" "}
       </section>
     );
   }
